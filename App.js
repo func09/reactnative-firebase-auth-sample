@@ -1,20 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import useAuth from "./app/hooks/useAuth";
+
+// Screens
+import GuestScreen from "./app/screens/Guest";
+import LoggedScreen from "./app/screens/Logged";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  const currentUser = useAuth();
+  if (currentUser) {
+    return <LoggedScreen />;
+  } else {
+    return <GuestScreen />;
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
